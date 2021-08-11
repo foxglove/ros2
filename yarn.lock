@@ -329,10 +329,10 @@
   resolved "https://registry.yarnpkg.com/@foxglove/eslint-plugin/-/eslint-plugin-0.13.0.tgz#2b92901bc803ea049d1df9dbbf85b29afd861942"
   integrity sha512-thIQmbG2ziu26bRafEQvi5Oik1mAJjimPIcdlpzV8yoyh4t0TOjStQT+8pPKU/mUrcCdmxSx0WI/zPLy99qjFQ==
 
-"@foxglove/tsconfig@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@foxglove/tsconfig/-/tsconfig-1.0.0.tgz#bd097ec78c6120e32ec37e71c14fcc9b5cabf9ae"
-  integrity sha512-JeiZ5AvgPE+tIPJZbzmOXD3ADGpv/y98KpF5Sj6AKi1nhWajcUpiER4Sb6lK5EHxlGF5pRGv7K9riKS1rSMXMw==
+"@foxglove/tsconfig@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@foxglove/tsconfig/-/tsconfig-1.1.0.tgz#48c37fffd6f349c3ee08a60fc62ccf636f3b59a6"
+  integrity sha512-qZU4MtXVgPhDBFazSEx7yDEuEg8cPHXFQVhBaUABZkCBdcnEE9sxlgEt0gSikF4fRtY6COGIJPVRflnPJXjJKA==
 
 "@humanwhocodes/config-array@^0.5.0":
   version "0.5.0"

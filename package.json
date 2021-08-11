@@ -30,7 +30,7 @@
   "dependencies": {},
   "devDependencies": {
     "@foxglove/eslint-plugin": "0.13.0",
-    "@foxglove/tsconfig": "1.0.0",
+    "@foxglove/tsconfig": "1.1.0",
     "@types/jest": "26.0.24",
     "@typescript-eslint/eslint-plugin": "4.28.4",
     "@typescript-eslint/parser": "4.28.4",
