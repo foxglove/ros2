@@ -1,16 +1,17 @@
-extends:
-  - plugin:@foxglove/base
-  - plugin:@foxglove/jest
-
 env:
   node: true
+  es2020: true
 
 ignorePatterns:
   - dist
+
+extends:
+  - plugin:@foxglove/base
+  - plugin:@foxglove/jest
 
 overrides:
   - files: ["*.ts", "*.tsx"]
     extends:
       - plugin:@foxglove/typescript
     parserOptions:
-      project: tsconfig.json
+      project: ./tsconfig.json

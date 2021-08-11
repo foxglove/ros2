@@ -1,3 +1,3 @@
-# @foxglove/template-typescript
+# @foxglove/ros1
 
-Template repository for new TypeScript projects
+> _Standalone TypeScript implementation of the ROS 2 protocol built on [@foxglove/rtps](https://github.com/foxglove/rtps)_

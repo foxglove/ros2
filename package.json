@@ -1,43 +1,52 @@
 {
-  "name": "@foxglove/template-typescript",
-  "private": true,
+  "name": "@foxglove/ros2",
   "version": "0.0.1",
-  "description": "",
-  "license": "",
+  "description": "Standalone TypeScript implementation of the ROS 2 protocol built on @foxglove/rtps",
+  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/foxglove/template.git"
+    "url": "https://github.com/foxglove/ros2.git"
   },
   "author": {
     "name": "Foxglove",
     "email": "contact@foxglove.dev",
     "url": "https://foxglove.dev/"
   },
-  "module": "dist/esm/index.js",
-  "main": "dist/cjs/index.js",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "files": [
     "dist",
     "src"
   ],
   "scripts": {
+    "build": "yarn clean && tsc -b",
     "clean": "rimraf dist *.tsbuildinfo",
-    "prepack": "tsc -b tsconfig.json tsconfig.cjs.json",
-    "build": "tsc -b tsconfig.json tsconfig.cjs.json",
-    "lint": "eslint --report-unused-disable-directives --fix .",
     "lint:ci": "eslint --report-unused-disable-directives .",
+    "lint": "eslint --report-unused-disable-directives --fix .",
+    "prepack": "yarn build",
+    "prepublishOnly": "yarn lint:ci && yarn test",
     "test": "jest"
   },
-  "dependencies": {},
+  "engines": {
+    "node": ">= 14"
+  },
+  "dependencies": {
+    "@foxglove/rosmsg": "^1.0.0",
+    "@foxglove/rosmsg-serialization": "^1.0.0",
+    "@foxglove/rtps": "file:../rtps",
+    "eventemitter3": "^4.0.7"
+  },
   "devDependencies": {
-    "@foxglove/eslint-plugin": "0.13.0",
-    "@foxglove/tsconfig": "1.0.0",
-    "@types/jest": "26.0.24",
-    "@typescript-eslint/eslint-plugin": "4.28.4",
-    "@typescript-eslint/parser": "4.28.4",
-    "eslint": "7.31.0",
+    "@foxglove/eslint-plugin": "0.14.0",
+    "@foxglove/tsconfig": "1.1.0",
+    "@types/jest": "27.0.0",
+    "@typescript-eslint/eslint-plugin": "4.29.1",
+    "@typescript-eslint/parser": "4.29.1",
+    "eslint": "7.32.0",
     "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-es": "4.1.0",
     "eslint-plugin-filenames": "1.3.2",
-    "eslint-plugin-import": "2.23.4",
+    "eslint-plugin-import": "2.24.0",
     "eslint-plugin-jest": "24.4.0",
     "eslint-plugin-prettier": "3.4.0",
     "jest": "27.0.6",
