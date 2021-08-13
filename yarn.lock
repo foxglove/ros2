@@ -360,10 +360,10 @@
   resolved "https://registry.yarnpkg.com/@foxglove/rostime/-/rostime-1.1.0.tgz#6a75ae46fdd17854a0033954f240bb6bda4b5e45"
   integrity sha512-9f/oxnEgaOcXyAQEamv/GpbTnfg872XRxXY97xfWI5WweR2+ERqDswM6hQLLznIQWeTiKVAsc4DNwEQKBeUhhg==
 
-"@foxglove/rtps@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@foxglove/rtps/-/rtps-1.1.0.tgz#b254dd7ced514510c058d3bf2cfc3017500427c5"
-  integrity sha512-mBPSJv60l2ho9aIhKv0+ZgQ1cdtza4kBHYrq0iK01rUlYikjReY/2ML6loLRdk4zcBRxIWnnY1LMMTi6x/qBIA==
+"@foxglove/rtps@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@foxglove/rtps/-/rtps-1.1.1.tgz#093d3333a2d747705abb2636d2a56c210a6a99d2"
+  integrity sha512-GjLacQyHyl5wxB++OB0/pxq44Z3vKvYf+xKaid3H/ZUbHDQBjOYbCF2X+GQSC4fYp9owkjiLgTeie7UrexOSdA==
   dependencies:
     "@foxglove/cdr" "^1.1.1"
     "@foxglove/rostime" "^1.1.0"

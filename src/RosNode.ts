@@ -152,7 +152,26 @@ export class RosNode extends EventEmitter<RosNodeEvents> {
 
   // async unsubscribeAllParams(): Promise<void> {}
 
-  // async getPublishedTopics(): Promise<[topic: string, dataType: string][]> {}
+  getPublishedTopics(): [topic: string, dataType: string][] {
+    const map = new Map<string, Set<string>>();
+    const writers = this._participant.topicWriters();
+    for (const endpoint of writers) {
+      let set = map.get(endpoint.topicName!);
+      if (set == undefined) {
+        set = new Set<string>();
+        map.set(endpoint.topicName!, set);
+      }
+      set.add(endpoint.typeName!);
+    }
+
+    const output: [string, string][] = [];
+    for (const [topic, dataTypes] of map) {
+      for (const dataType of dataTypes) {
+        output.push([topic, dataType]);
+      }
+    }
+    return output;
+  }
 
   // async getSystemState(): Promise<RosGraph> {}
 
