@@ -16,7 +16,9 @@
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
-    "src"
+    "src",
+    "nodejs.d.ts",
+    "nodejs.js"
   ],
   "scripts": {
     "build": "yarn clean && tsc -b",
@@ -25,23 +27,27 @@
     "lint": "eslint --report-unused-disable-directives --fix .",
     "prepack": "yarn build",
     "prepublishOnly": "yarn lint:ci && yarn test",
-    "test": "jest"
+    "test": "jest",
+    "examples:listener": "node -r esbuild-runner/register examples/listener.ts"
   },
   "engines": {
     "node": ">= 14"
   },
   "dependencies": {
     "@foxglove/rosmsg": "^1.0.0",
-    "@foxglove/rosmsg-serialization": "^1.0.0",
-    "@foxglove/rtps": "file:../rtps",
+    "@foxglove/rosmsg2-serialization": "^1.0.1",
+    "@foxglove/rtps": "^0.1.3",
     "eventemitter3": "^4.0.7"
   },
   "devDependencies": {
     "@foxglove/eslint-plugin": "0.14.0",
+    "@foxglove/rosmsg-msgs-common": "^1.0.1",
     "@foxglove/tsconfig": "1.1.0",
-    "@types/jest": "27.0.0",
+    "@types/jest": "27.0.1",
     "@typescript-eslint/eslint-plugin": "4.29.1",
     "@typescript-eslint/parser": "4.29.1",
+    "esbuild": "^0.12.20",
+    "esbuild-runner": "^2.2.0",
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-es": "4.1.0",

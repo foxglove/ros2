@@ -1,16 +1,8 @@
-# @foxglove/ros2
-
-> _Standalone TypeScript implementation of the ROS 2 protocol built on [@foxglove/rtps](https://github.com/foxglove/rtps)_
-
-## Usage
-
-A simple listener that is compatible with the ROS 2 "talker" example application.
-
-```Typescript
 import { parse as parseMsgDef } from "@foxglove/rosmsg";
 import { toString as timeString } from "@foxglove/rostime";
-import { RosNode } from "@foxglove/ros2";
-import { getNetworkInterfaces, UdpSocketNode } from "@foxglove/ros2/nodejs";
+
+import { getNetworkInterfaces, UdpSocketNode } from "../nodejs";
+import { RosNode } from "../src";
 
 async function main() {
   const ros = new RosNode({
@@ -47,18 +39,3 @@ async function main() {
 }
 
 void main();
-```
-
-### Test
-
-`yarn test`
-
-## License
-
-@foxglove/ros2 is licensed under [MIT License](https://opensource.org/licenses/MIT).
-
-## Releasing
-
-1. Run `yarn version --[major|minor|patch]` to bump version
-2. Run `git push && git push --tags` to push new tag
-3. GitHub Actions will take care of the rest
