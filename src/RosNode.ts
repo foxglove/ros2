@@ -14,7 +14,13 @@ import {
 import { EventEmitter } from "eventemitter3";
 
 import { Subscription, SubscribeOpts } from "./Subscription";
-import { rosTopicToDds, rosTypeToDds } from "./rosToDds";
+import {
+  DdsTopicType,
+  ddsToRosTopic,
+  ddsToRosType,
+  rosTopicToDds,
+  rosTypeToDds,
+} from "./ddsMangling";
 
 export interface RosNodeEvents {
   discoveredParticipant: (participant: ParticipantAttributes) => void;
@@ -81,25 +87,32 @@ export class RosNode extends EventEmitter<RosNodeEvents> {
   }
 
   subscribe(options: SubscribeOpts): Subscription {
-    const { topic, dataType } = options;
+    const topicName = rosTopicToDds(options.topic);
+    if (topicName == undefined) {
+      throw new Error(`Invalid topic "${options.topic}"`);
+    }
+    const typeName = rosTypeToDds(options.dataType);
+    if (typeName == undefined) {
+      throw new Error(`Invalid dataType "${options.dataType}"`);
+    }
 
     // Check if we are already subscribed
-    let subscription = this.subscriptions.get(topic);
+    let subscription = this.subscriptions.get(options.topic);
     if (subscription != undefined) {
-      this._log?.debug?.(`reusing existing subscribtion to ${topic} (${dataType})`);
+      this._log?.debug?.(`reusing existing subscribtion to ${options.topic} (${options.dataType})`);
       return subscription;
     }
 
     const DURATION_INFINITE = { sec: 0x7fffffff, nsec: 0xffffffff };
     const rtpsOpts = {
-      topicName: rosTopicToDds(options.topic),
-      typeName: rosTypeToDds(options.dataType),
+      topicName,
+      typeName,
       durability: Durability.TransientLocal,
       reliability: { kind: Reliability.Reliable, maxBlockingTime: DURATION_INFINITE },
       history: { kind: HistoryKind.KeepLast, depth: 1 },
     };
 
-    this._log?.debug?.(`subscribing to ${topic} (${dataType})`);
+    this._log?.debug?.(`subscribing to ${options.topic} (${options.dataType})`);
 
     // Asynchronously announce this subscription by writing to our builtin Subscription topic.
     // As writers that match these subscription options are discovered, a new reader will be created
@@ -113,7 +126,7 @@ export class RosNode extends EventEmitter<RosNodeEvents> {
       msgDefinition: options.msgDefinition,
       skipParsing: options.skipParsing,
     });
-    this.subscriptions.set(topic, subscription);
+    this.subscriptions.set(options.topic, subscription);
 
     return subscription;
   }
@@ -166,8 +179,14 @@ export class RosNode extends EventEmitter<RosNodeEvents> {
 
     const output: [string, string][] = [];
     for (const [topic, dataTypes] of map) {
-      for (const dataType of dataTypes) {
-        output.push([topic, dataType]);
+      const ros2Topic = ddsToRosTopic(topic);
+      if (ros2Topic != undefined && ros2Topic.kind !== DdsTopicType.Topic) {
+        for (const dataType of dataTypes) {
+          const ros2DataType = ddsToRosType(dataType);
+          if (ros2DataType != undefined) {
+            output.push([ros2Topic.topic, ros2DataType]);
+          }
+        }
       }
     }
     return output;
