@@ -180,7 +180,7 @@ export class RosNode extends EventEmitter<RosNodeEvents> {
     const output: [string, string][] = [];
     for (const [topic, dataTypes] of map) {
       const ros2Topic = ddsToRosTopic(topic);
-      if (ros2Topic != undefined && ros2Topic.kind !== DdsTopicType.Topic) {
+      if (ros2Topic != undefined && ros2Topic.kind === DdsTopicType.Topic) {
         for (const dataType of dataTypes) {
           const ros2DataType = ddsToRosType(dataType);
           if (ros2DataType != undefined) {
