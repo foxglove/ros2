@@ -140,6 +140,7 @@ export class RosNode extends EventEmitter<RosNodeEvents> {
     if (subscription == undefined) {
       return false;
     }
+    this.subscriptions.delete(topic);
 
     if (!this._participant.unsubscribe(subscription.readerEntityId)) {
       this._log?.warn?.(`unsubscribing from "${topic}" but participant was not subscribed`);
