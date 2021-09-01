@@ -362,7 +362,7 @@
   resolved "https://registry.yarnpkg.com/@foxglove/rostime/-/rostime-1.1.0.tgz#6a75ae46fdd17854a0033954f240bb6bda4b5e45"
   integrity sha512-9f/oxnEgaOcXyAQEamv/GpbTnfg872XRxXY97xfWI5WweR2+ERqDswM6hQLLznIQWeTiKVAsc4DNwEQKBeUhhg==
 
-"@foxglove/rtps@^1.1.1":
+"@foxglove/rtps@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@foxglove/rtps/-/rtps-1.2.0.tgz#663434f4fa58ee8d8b922484e6d8e09e63383cc5"
   integrity sha512-Na+4s8LmNysIl4Vk24xZ90pxnWGrf6rAbRGYOhJpSQ/rsXcp6FawGk+PSQ+cx/wCPBgMpT2q4sDyoI9GIsrxuA==
