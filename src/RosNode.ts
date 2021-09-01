@@ -81,9 +81,8 @@ export class RosNode extends EventEmitter<RosNodeEvents> {
     await this._participant.start();
   }
 
-  shutdown(): void {
-    this._log?.debug?.("shutting down");
-    this._participant.shutdown();
+  async shutdown(): Promise<void> {
+    await this._participant.shutdown();
   }
 
   subscribe(options: SubscribeOpts): Subscription {

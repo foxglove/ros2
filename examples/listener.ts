@@ -30,8 +30,12 @@ async function main() {
 
   // Listen for Ctrl+C to stop
   process.on("SIGINT", () => {
-    ros.shutdown();
-    process.exit();
+    const shutdown = async () => {
+      console.log("[INFO] Shutting down");
+      await ros.shutdown();
+      process.exit();
+    };
+    void shutdown();
   });
 
   // Wait for Ctrl+C
