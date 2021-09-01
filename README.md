@@ -37,13 +37,15 @@ async function main() {
   });
 
   // Listen for Ctrl+C to stop
-  process.on("SIGINT", () => {
-    ros.shutdown();
-    process.exit();
-  });
+  process.on("SIGINT", () => void shutdown(ros));
 
   // Wait for Ctrl+C
   process.stdin.resume();
+}
+
+async function shutdown(ros: RosNode) {
+  await ros.shutdown();
+  process.exit();
 }
 
 void main();
