@@ -335,9 +335,9 @@
   integrity sha512-jbRTk8rpMFJ5l7PNjRZU+lHoD+29mrx8blFL4ySDyA5SDC8ERxG4HRCrj9080etJ47wYp6lu/7YsQIwpRJmwOg==
 
 "@foxglove/rosmsg-msgs-common@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@foxglove/rosmsg-msgs-common/-/rosmsg-msgs-common-1.0.2.tgz#24a8ec331c71a9f4d0d0277e9ea3d3a6e5679a5a"
-  integrity sha512-p1vTUIh3D7Ef9OFNYaklvFN0vaJjawUwDgXfqF9aYflo5YkuH497kSDEHgPsAgNVkP0dU3ss+6OLGAB6NxUgvg==
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@foxglove/rosmsg-msgs-common/-/rosmsg-msgs-common-1.0.3.tgz#99e43ed5bd20f39224062068bb2e8689c0ae6337"
+  integrity sha512-eazcc5+4rWw+R72fz3KseW+x8UX21dUhvmYuyaxnU+Nz20Mx2vOm8TjTHUziXtf/jQkSmGhHXQIVjCEcLwQZxw==
   dependencies:
     "@foxglove/rosmsg" "^2.0.0"
 
