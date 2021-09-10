@@ -40,7 +40,7 @@
     "eventemitter3": "^4.0.7"
   },
   "devDependencies": {
-    "@foxglove/eslint-plugin": "0.15.0",
+    "@foxglove/eslint-plugin": "0.16.0",
     "@foxglove/rosmsg-msgs-common": "^1.0.2",
     "@foxglove/tsconfig": "1.1.0",
     "@types/jest": "27.0.1",
