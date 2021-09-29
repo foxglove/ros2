@@ -2,6 +2,8 @@
 
 > _Standalone TypeScript implementation of the ROS 2 protocol built on [@foxglove/rtps](https://github.com/foxglove/rtps)_
 
+[![npm version](https://img.shields.io/npm/v/@foxglove/ros2.svg?style=flat)](https://www.npmjs.com/package/@foxglove/ros2)
+
 ## Usage
 
 A simple listener that is compatible with the ROS 2 "talker" example application.
