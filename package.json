@@ -34,14 +34,14 @@
     "node": ">= 14"
   },
   "dependencies": {
-    "@foxglove/rosmsg": "^2.0.0",
-    "@foxglove/rosmsg2-serialization": "^1.0.2",
+    "@foxglove/rosmsg": "^2.0.0 || ^3.0.0",
+    "@foxglove/rosmsg2-serialization": "^1.0.4",
     "@foxglove/rtps": "^1.2.2",
     "eventemitter3": "^4.0.7"
   },
   "devDependencies": {
     "@foxglove/eslint-plugin": "0.17.0",
-    "@foxglove/rosmsg-msgs-common": "^1.0.2",
+    "@foxglove/rosmsg-msgs-common": "^1.0.3",
     "@foxglove/tsconfig": "1.1.0",
     "@types/jest": "27.0.1",
     "@typescript-eslint/eslint-plugin": "4.31.1",
