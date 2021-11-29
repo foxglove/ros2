@@ -324,11 +324,6 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@foxglove/cdr@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@foxglove/cdr/-/cdr-1.2.0.tgz#b8c69b37299ae47bb3ffc0f0eef70d99cf9a0a4b"
-  integrity sha512-KuPGicuOPA4U5Y+a3YfHe6prQhbDlI6zxaIYhhKhF+2/qTophkOemJEqbJcAOfy1rim7+O5n2S9ATPK63C9GPw==
-
 "@foxglove/cdr@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@foxglove/cdr/-/cdr-2.0.0.tgz#12bade26e1525e522fc9f0366830e65e5cb52e27"
@@ -346,12 +341,12 @@
   dependencies:
     "@foxglove/rosmsg" "^2.0.0 || ^3.0.0"
 
-"@foxglove/rosmsg2-serialization@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@foxglove/rosmsg2-serialization/-/rosmsg2-serialization-1.0.4.tgz#cadb508163a5a12f1b2ad463ee221a48f9168679"
-  integrity sha512-OF6ZoWO4jKhZZ6N/68fc4FVgXyVMf5JKvnbg/U5gq7owdwDHjWsmMpgs+R2NWW2rffYVZr14kPp1Iu4I+iyvBw==
+"@foxglove/rosmsg2-serialization@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@foxglove/rosmsg2-serialization/-/rosmsg2-serialization-1.0.5.tgz#a0c4954c43ef5a9a2012e57be94e5f3a65d0a35f"
+  integrity sha512-cpncaiXFG1j00aOA2SCWhOJJDT8p5DagLtOfQ+6ksf89+r5BJzH21EuvLRQbOUQh0Qiii/tJtQPu28Ynq5fx0Q==
   dependencies:
-    "@foxglove/cdr" "^1.2.0"
+    "@foxglove/cdr" "^2.0.0"
     "@foxglove/rosmsg" "^2.0.0 || ^3.0.0"
     "@foxglove/rostime" "^1.1.0"
 
