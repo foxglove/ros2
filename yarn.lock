@@ -329,10 +329,10 @@
   resolved "https://registry.yarnpkg.com/@foxglove/cdr/-/cdr-2.0.0.tgz#12bade26e1525e522fc9f0366830e65e5cb52e27"
   integrity sha512-Zu00eJyO05bX9js7/E2QfQNjG8p7jNhE/vUuTF2lO+MS89/kLDb/b6fle8krLy7Bnd7ClKv6G4JAmiqy6wKwEA==
 
-"@foxglove/eslint-plugin@0.17.0":
-  version "0.17.0"
-  resolved "https://registry.yarnpkg.com/@foxglove/eslint-plugin/-/eslint-plugin-0.17.0.tgz#e9db0cc54030a294f34bfa9d8dce2798995be06c"
-  integrity sha512-ypt719S8GycVjqC+ac9TFFH+0P7NzoRAvmjOsAZUrCnpzabfqxSo21TIJFdF8Cp7lNlqxwrglbZfWs8JhS/fpA==
+"@foxglove/eslint-plugin@0.17.1":
+  version "0.17.1"
+  resolved "https://registry.yarnpkg.com/@foxglove/eslint-plugin/-/eslint-plugin-0.17.1.tgz#f29fbe7bf538f2721535a9c06ec6ec607ad72f71"
+  integrity sha512-/Z32WFj7bBfEIdCh0aXTc5mQbVUcm1KvG586FxCq8k0r0oBUml0bAtLIem9IjE7sUWtabSDJWTFLJpHJhlP+XA==
 
 "@foxglove/rosmsg-msgs-common@^1.0.3":
   version "1.0.4"
