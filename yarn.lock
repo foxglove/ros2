@@ -324,10 +324,15 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@foxglove/cdr@^1.1.1", "@foxglove/cdr@^1.2.0":
+"@foxglove/cdr@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@foxglove/cdr/-/cdr-1.2.0.tgz#b8c69b37299ae47bb3ffc0f0eef70d99cf9a0a4b"
   integrity sha512-KuPGicuOPA4U5Y+a3YfHe6prQhbDlI6zxaIYhhKhF+2/qTophkOemJEqbJcAOfy1rim7+O5n2S9ATPK63C9GPw==
+
+"@foxglove/cdr@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@foxglove/cdr/-/cdr-2.0.0.tgz#12bade26e1525e522fc9f0366830e65e5cb52e27"
+  integrity sha512-Zu00eJyO05bX9js7/E2QfQNjG8p7jNhE/vUuTF2lO+MS89/kLDb/b6fle8krLy7Bnd7ClKv6G4JAmiqy6wKwEA==
 
 "@foxglove/eslint-plugin@0.17.0":
   version "0.17.0"
@@ -362,12 +367,12 @@
   resolved "https://registry.yarnpkg.com/@foxglove/rostime/-/rostime-1.1.0.tgz#6a75ae46fdd17854a0033954f240bb6bda4b5e45"
   integrity sha512-9f/oxnEgaOcXyAQEamv/GpbTnfg872XRxXY97xfWI5WweR2+ERqDswM6hQLLznIQWeTiKVAsc4DNwEQKBeUhhg==
 
-"@foxglove/rtps@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@foxglove/rtps/-/rtps-1.2.2.tgz#299afb5add3b689a1c1b79753b2bd522998014e5"
-  integrity sha512-R/A6TOYBEDJllmgwzsWzO0R21pfBcfJ+IUepzAmh7uULJNAWesT9D96IeXORpcgF7oMnlozUk52hv3zlmEKmNg==
+"@foxglove/rtps@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@foxglove/rtps/-/rtps-1.2.3.tgz#48930dc9ca7b22ba1814c01cd7cf4f911eb48a5f"
+  integrity sha512-RguAO9YJQJF6Tt8jiXLE7Xs9I8Gsex+KcLqO0l7u70SRiGCz/7l3xkx4r64My0xlNL9BkAMSm/xONrh6U4G/iQ==
   dependencies:
-    "@foxglove/cdr" "^1.1.1"
+    "@foxglove/cdr" "^2.0.0"
     "@foxglove/rostime" "^1.1.0"
     avl "^1.5.2"
     eventemitter3 "^4.0.7"
