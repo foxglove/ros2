@@ -43,7 +43,7 @@
     "@foxglove/eslint-plugin": "0.18.0",
     "@foxglove/rosmsg-msgs-common": "^1.0.3",
     "@foxglove/tsconfig": "1.1.0",
-    "@types/jest": "27.0.3",
+    "@types/jest": "27.4.0",
     "@typescript-eslint/eslint-plugin": "5.6.0",
     "@typescript-eslint/parser": "5.6.0",
     "esbuild": "0.14.10",
