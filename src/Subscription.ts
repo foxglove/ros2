@@ -2,11 +2,14 @@ import { RosMsgDefinition } from "@foxglove/rosmsg";
 import { MessageReader } from "@foxglove/rosmsg2-serialization";
 import { Time, fromDate } from "@foxglove/rostime";
 import {
+  Durability,
   EndpointAttributes,
   EntityId,
   Guid,
+  HistoryAndDepth,
   makeGuid,
   Participant,
+  ReliabilityAndMaxBlockingTime,
   SubscribeOpts as RtpsSubscribeOpts,
   subscriptionMatchesPublication,
 } from "@foxglove/rtps";
@@ -15,6 +18,9 @@ import { EventEmitter } from "eventemitter3";
 export type SubscribeOpts = {
   topic: string;
   dataType: string;
+  durability?: Durability;
+  reliability?: ReliabilityAndMaxBlockingTime;
+  history?: HistoryAndDepth;
   msgDefinition?: RosMsgDefinition[];
   skipParsing?: boolean;
 };
