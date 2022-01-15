@@ -1,3 +1,8 @@
+import { Duration, Time, areEqual } from "@foxglove/rostime";
+import { VendorId } from "@foxglove/rtps";
+
+export const MAX_TIME: Time = { nsec: 4294967295, sec: 2147483647 };
+
 export enum DdsTopicType {
   Topic = "t",
   ServiceRequest = "q",
@@ -77,4 +82,15 @@ export function ddsToRosType(ddsType: string): string | undefined {
     }
   }
   return undefined;
+}
+
+export function vendorName(vendorId: VendorId): string {
+  return VendorId[vendorId] ?? `0x${vendorId.toString(16)}`;
+}
+
+export function durationToString(duration: Duration): string {
+  if (areEqual(duration, MAX_TIME)) {
+    return "Infinite";
+  }
+  return `${duration.sec}s ${duration.nsec}ns`;
 }

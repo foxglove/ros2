@@ -1,9 +1,10 @@
 import {
   Durability,
-  EndpointAttributes,
+  EndpointAttributesWithTopic,
   GuidPrefix,
   HistoryKind,
   LoggerService,
+  makeGuid,
   NetworkInterface,
   Participant,
   ParticipantAttributes,
@@ -22,10 +23,22 @@ import {
   rosTypeToDds,
 } from "./ddsMangling";
 
+export type RosEndpoint = EndpointAttributesWithTopic & {
+  /**
+   * The DDS guid of this endpoint. A combination of the guidPrefix and entityId
+   */
+  guid: string;
+
+  /**
+   * The ROS data type. See <https://docs.ros.org/en/galactic/Concepts/About-ROS-Interfaces.html>
+   */
+  dataType: string;
+};
+
 export interface RosNodeEvents {
   discoveredParticipant: (participant: ParticipantAttributes) => void;
-  discoveredPublication: (endpoint: EndpointAttributes) => void;
-  discoveredSubscription: (endpoint: EndpointAttributes) => void;
+  discoveredPublication: (endpoint: RosEndpoint) => void;
+  discoveredSubscription: (endpoint: RosEndpoint) => void;
 }
 
 export class RosNode extends EventEmitter<RosNodeEvents> {
@@ -69,12 +82,48 @@ export class RosNode extends EventEmitter<RosNodeEvents> {
     this._participant.on("discoveredParticipant", (participant) =>
       this.emit("discoveredParticipant", participant),
     );
-    this._participant.on("discoveredPublication", (endpoint) =>
-      this.emit("discoveredPublication", endpoint),
-    );
-    this._participant.on("discoveredSubscription", (endpoint) =>
-      this.emit("discoveredSubscription", endpoint),
-    );
+    this._participant.on("discoveredPublication", (endpoint) => {
+      if (endpoint.topicName == undefined || endpoint.typeName == undefined) {
+        this._log?.warn?.(
+          `Missing topicName or typeName: ${JSON.stringify(endpoint)}`,
+          "discoveredPublication",
+        );
+        return;
+      }
+
+      const guid = makeGuid(endpoint.guidPrefix, endpoint.entityId);
+      const dataType = ddsToRosType(endpoint.typeName);
+      if (dataType == undefined) {
+        this._log?.warn?.(
+          `Cannot convert DDS typeName "${endpoint.typeName}" to ROS dataType`,
+          "discoveredPublication",
+        );
+        return;
+      }
+
+      this.emit("discoveredPublication", { ...endpoint, guid, dataType } as RosEndpoint);
+    });
+    this._participant.on("discoveredSubscription", (endpoint) => {
+      if (endpoint.topicName == undefined || endpoint.typeName == undefined) {
+        this._log?.warn?.(
+          `Missing topicName or typeName: ${JSON.stringify(endpoint)}`,
+          "discoveredSubscription",
+        );
+        return;
+      }
+
+      const guid = makeGuid(endpoint.guidPrefix, endpoint.entityId);
+      const dataType = ddsToRosType(endpoint.typeName);
+      if (dataType == undefined) {
+        this._log?.warn?.(
+          `Cannot convert DDS typeName "${endpoint.typeName}" to ROS dataType`,
+          "discoveredSubscription",
+        );
+        return;
+      }
+
+      this.emit("discoveredSubscription", { ...endpoint, guid, dataType } as RosEndpoint);
+    });
   }
 
   async start(): Promise<void> {
@@ -171,26 +220,32 @@ export class RosNode extends EventEmitter<RosNodeEvents> {
 
   // async unsubscribeAllParams(): Promise<void> {}
 
-  getPublishedTopics(): [topic: string, dataType: string][] {
-    const map = new Map<string, Set<string>>();
+  getPublishedTopics(): ReadonlyMap<string, RosEndpoint[]> {
+    const topicsToEndpoints = new Map<string, EndpointAttributesWithTopic[]>();
     const writers = this._participant.topicWriters();
     for (const endpoint of writers) {
-      let set = map.get(endpoint.topicName!);
-      if (set == undefined) {
-        set = new Set<string>();
-        map.set(endpoint.topicName!, set);
+      let endpoints = topicsToEndpoints.get(endpoint.topicName);
+      if (endpoints == undefined) {
+        endpoints = [];
+        topicsToEndpoints.set(endpoint.topicName, endpoints);
       }
-      set.add(endpoint.typeName!);
+      endpoints.push(endpoint);
     }
 
-    const output: [string, string][] = [];
-    for (const [topic, dataTypes] of map) {
+    const output = new Map<string, RosEndpoint[]>();
+    for (const [topic, endpoints] of topicsToEndpoints) {
       const ros2Topic = ddsToRosTopic(topic);
       if (ros2Topic != undefined && ros2Topic.kind === DdsTopicType.Topic) {
-        for (const dataType of dataTypes) {
-          const ros2DataType = ddsToRosType(dataType);
-          if (ros2DataType != undefined) {
-            output.push([ros2Topic.topic, ros2DataType]);
+        for (const endpoint of endpoints) {
+          const dataType = ddsToRosType(endpoint.typeName);
+          if (dataType != undefined) {
+            let endpoints = output.get(topic);
+            if (endpoints == undefined) {
+              endpoints = [];
+              output.set(topic, endpoints);
+            }
+            const guid = makeGuid(endpoint.guidPrefix, endpoint.entityId);
+            endpoints.push({ ...endpoint, guid, dataType });
           }
         }
       }
