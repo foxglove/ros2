@@ -28,7 +28,7 @@ async function main() {
       const strMsg = msg as { data: string };
       console.log(
         `[INFO] [${timeString(timestamp)}] [listener]: I heard: [${strMsg.data}] on [${
-          pub.topicName
+          pub.rosTopic
         }]`,
       );
     });
@@ -37,7 +37,7 @@ async function main() {
   ros.on("discoveredPublication", (pub) => {
     console.log(
       `[INFO] [${timeString(fromMillis(Date.now()))}] [listener]: Discovered publication ${
-        pub.topicName
+        pub.rosTopic
       } (${pub.rosDataType}) from ${pub.guid} (${vendorName(pub.vendorId)}), durability=${
         Durability[pub.durability] ?? pub.durability
       }, reliability=${
