@@ -239,13 +239,13 @@ export class RosNode extends EventEmitter<RosNodeEvents> {
         for (const endpoint of endpoints) {
           const dataType = ddsToRosType(endpoint.typeName);
           if (dataType != undefined) {
-            let endpoints = output.get(topic);
-            if (endpoints == undefined) {
-              endpoints = [];
-              output.set(topic, endpoints);
+            let rosEndpoints = output.get(topic);
+            if (rosEndpoints == undefined) {
+              rosEndpoints = [];
+              output.set(topic, rosEndpoints);
             }
             const guid = makeGuid(endpoint.guidPrefix, endpoint.entityId);
-            endpoints.push({ ...endpoint, guid, dataType });
+            rosEndpoints.push({ ...endpoint, guid, dataType });
           }
         }
       }

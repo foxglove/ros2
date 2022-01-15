@@ -1,5 +1,5 @@
 import { parse as parseMsgDef } from "@foxglove/rosmsg";
-import { toString as timeString, fromMillis, toSec } from "@foxglove/rostime";
+import { toString as timeString, fromMillis } from "@foxglove/rostime";
 import { Durability, HistoryKind, Reliability } from "@foxglove/rtps";
 
 import { getNetworkInterfaces, UdpSocketNode } from "../nodejs";
@@ -39,10 +39,12 @@ async function main() {
       `[INFO] [${timeString(fromMillis(Date.now()))}] [listener]: Discovered publication ${
         pub.topicName
       } (${pub.dataType}) from ${pub.guid} (${vendorName(pub.vendorId)}), durability=${
-        Durability[pub.durability]
-      }, reliability=${Reliability[pub.reliability.kind]}, maxBlockingTime=${durationToString(
-        pub.reliability.maxBlockingTime,
-      )} history=${HistoryKind[pub.history.kind]}, depth=${pub.history.depth}}`,
+        Durability[pub.durability] ?? pub.durability
+      }, reliability=${
+        Reliability[pub.reliability.kind] ?? pub.reliability.kind
+      }, maxBlockingTime=${durationToString(pub.reliability.maxBlockingTime)} history=${
+        HistoryKind[pub.history.kind] ?? pub.history.kind
+      }, depth=${pub.history.depth}}`,
     );
 
     if (pub.dataType === "std_msgs/msg/String") {
