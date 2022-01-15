@@ -19,7 +19,7 @@ async function main() {
   function subscribeToStringTopic(pub: RosEndpoint) {
     const subscription = ros.subscribe({
       topic: pub.topicName,
-      dataType: pub.dataType,
+      dataType: pub.rosDataType,
       durability: pub.durability,
       history: pub.history,
       msgDefinition,
@@ -38,7 +38,7 @@ async function main() {
     console.log(
       `[INFO] [${timeString(fromMillis(Date.now()))}] [listener]: Discovered publication ${
         pub.topicName
-      } (${pub.dataType}) from ${pub.guid} (${vendorName(pub.vendorId)}), durability=${
+      } (${pub.rosDataType}) from ${pub.guid} (${vendorName(pub.vendorId)}), durability=${
         Durability[pub.durability] ?? pub.durability
       }, reliability=${
         Reliability[pub.reliability.kind] ?? pub.reliability.kind
@@ -47,7 +47,7 @@ async function main() {
       }, depth=${pub.history.depth}}`,
     );
 
-    if (pub.dataType === "std_msgs/msg/String") {
+    if (pub.rosDataType === "std_msgs/msg/String") {
       subscribeToStringTopic(pub);
     }
   });
