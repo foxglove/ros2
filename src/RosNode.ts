@@ -265,7 +265,6 @@ export class RosNode extends EventEmitter<RosNodeEvents> {
   // async unsubscribeAllParams(): Promise<void> {}
 
   getPublishedTopics(): ReadonlyMap<string, RosEndpoint[]> {
-    // const topicsToEndpoints = new Map<string, EndpointAttributesWithTopic[]>();
     const output = new Map<string, RosEndpoint[]>();
     const writers = this._participant.topicWriters();
     for (const endpoint of writers) {
