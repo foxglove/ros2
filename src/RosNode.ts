@@ -30,9 +30,17 @@ export type RosEndpoint = EndpointAttributesWithTopic & {
   guid: string;
 
   /**
-   * The ROS data type. See <https://docs.ros.org/en/galactic/Concepts/About-ROS-Interfaces.html>
+   * The ROS topic name. This is different from the DDS topic name. A DDS topic
+   * name of "rt/foo/bar" translates to a rosTopic of "/foo/bar"
    */
-  dataType: string;
+  rosTopic: string;
+
+  /**
+   * The ROS data type. See <https://docs.ros.org/en/galactic/Concepts/About-ROS-Interfaces.html>
+   * This is different from the DDS type name. A DDS type name of "std_msgs::msg::dds_::String_"
+   * translates to a rosDataType of "std_msgs/msg/String"
+   */
+  rosDataType: string;
 };
 
 export interface RosNodeEvents {
@@ -91,9 +99,21 @@ export class RosNode extends EventEmitter<RosNodeEvents> {
         return;
       }
 
-      const guid = makeGuid(endpoint.guidPrefix, endpoint.entityId);
-      const dataType = ddsToRosType(endpoint.typeName);
-      if (dataType == undefined) {
+      const rosTopic = ddsToRosTopic(endpoint.topicName);
+      if (rosTopic == undefined) {
+        this._log?.warn?.(
+          `Cannot convert DDS topicName "${endpoint.topicName}" to ROS topic`,
+          "discoveredPublication",
+        );
+        return;
+      }
+      if (rosTopic.kind !== DdsTopicType.Topic) {
+        // Ignore parameters, services, and actions for now
+        return;
+      }
+
+      const rosDataType = ddsToRosType(endpoint.typeName);
+      if (rosDataType == undefined) {
         this._log?.warn?.(
           `Cannot convert DDS typeName "${endpoint.typeName}" to ROS dataType`,
           "discoveredPublication",
@@ -101,7 +121,13 @@ export class RosNode extends EventEmitter<RosNodeEvents> {
         return;
       }
 
-      this.emit("discoveredPublication", { ...endpoint, guid, dataType } as RosEndpoint);
+      const guid = makeGuid(endpoint.guidPrefix, endpoint.entityId);
+      this.emit("discoveredPublication", {
+        ...endpoint,
+        guid,
+        rosTopic: rosTopic.topic,
+        rosDataType,
+      } as RosEndpoint);
     });
     this._participant.on("discoveredSubscription", (endpoint) => {
       if (endpoint.topicName == undefined || endpoint.typeName == undefined) {
@@ -112,9 +138,21 @@ export class RosNode extends EventEmitter<RosNodeEvents> {
         return;
       }
 
-      const guid = makeGuid(endpoint.guidPrefix, endpoint.entityId);
-      const dataType = ddsToRosType(endpoint.typeName);
-      if (dataType == undefined) {
+      const rosTopic = ddsToRosTopic(endpoint.topicName);
+      if (rosTopic == undefined) {
+        this._log?.warn?.(
+          `Cannot convert DDS topicName "${endpoint.topicName}" to ROS topic`,
+          "discoveredPublication",
+        );
+        return;
+      }
+      if (rosTopic.kind !== DdsTopicType.Topic) {
+        // Ignore parameters, services, and actions for now
+        return;
+      }
+
+      const rosDataType = ddsToRosType(endpoint.typeName);
+      if (rosDataType == undefined) {
         this._log?.warn?.(
           `Cannot convert DDS typeName "${endpoint.typeName}" to ROS dataType`,
           "discoveredSubscription",
@@ -122,7 +160,13 @@ export class RosNode extends EventEmitter<RosNodeEvents> {
         return;
       }
 
-      this.emit("discoveredSubscription", { ...endpoint, guid, dataType } as RosEndpoint);
+      const guid = makeGuid(endpoint.guidPrefix, endpoint.entityId);
+      this.emit("discoveredSubscription", {
+        ...endpoint,
+        guid,
+        rosTopic: rosTopic.topic,
+        rosDataType,
+      } as RosEndpoint);
     });
   }
 
@@ -237,15 +281,16 @@ export class RosNode extends EventEmitter<RosNodeEvents> {
       const ros2Topic = ddsToRosTopic(topic);
       if (ros2Topic != undefined && ros2Topic.kind === DdsTopicType.Topic) {
         for (const endpoint of endpoints) {
-          const dataType = ddsToRosType(endpoint.typeName);
-          if (dataType != undefined) {
+          const rosTopic = ddsToRosTopic(endpoint.topicName);
+          const rosDataType = ddsToRosType(endpoint.typeName);
+          if (rosTopic != undefined && rosDataType != undefined) {
             let rosEndpoints = output.get(topic);
             if (rosEndpoints == undefined) {
               rosEndpoints = [];
               output.set(topic, rosEndpoints);
             }
             const guid = makeGuid(endpoint.guidPrefix, endpoint.entityId);
-            rosEndpoints.push({ ...endpoint, guid, dataType });
+            rosEndpoints.push({ ...endpoint, guid, rosTopic: rosTopic.topic, rosDataType });
           }
         }
       }
