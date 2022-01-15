@@ -265,36 +265,25 @@ export class RosNode extends EventEmitter<RosNodeEvents> {
   // async unsubscribeAllParams(): Promise<void> {}
 
   getPublishedTopics(): ReadonlyMap<string, RosEndpoint[]> {
-    const topicsToEndpoints = new Map<string, EndpointAttributesWithTopic[]>();
+    // const topicsToEndpoints = new Map<string, EndpointAttributesWithTopic[]>();
+    const output = new Map<string, RosEndpoint[]>();
     const writers = this._participant.topicWriters();
     for (const endpoint of writers) {
-      let endpoints = topicsToEndpoints.get(endpoint.topicName);
+      const rosTopic = ddsToRosTopic(endpoint.topicName);
+      const rosDataType = ddsToRosType(endpoint.typeName);
+      if (!rosTopic || rosDataType == undefined || rosTopic.kind !== DdsTopicType.Topic) {
+        continue;
+      }
+      let endpoints = output.get(rosTopic.topic);
       if (endpoints == undefined) {
         endpoints = [];
-        topicsToEndpoints.set(endpoint.topicName, endpoints);
+        output.set(rosTopic.topic, endpoints);
       }
-      endpoints.push(endpoint);
+
+      const guid = makeGuid(endpoint.guidPrefix, endpoint.entityId);
+      endpoints.push({ ...endpoint, guid, rosTopic: rosTopic.topic, rosDataType });
     }
 
-    const output = new Map<string, RosEndpoint[]>();
-    for (const [topic, endpoints] of topicsToEndpoints) {
-      const ros2Topic = ddsToRosTopic(topic);
-      if (ros2Topic != undefined && ros2Topic.kind === DdsTopicType.Topic) {
-        for (const endpoint of endpoints) {
-          const rosTopic = ddsToRosTopic(endpoint.topicName);
-          const rosDataType = ddsToRosType(endpoint.typeName);
-          if (rosTopic != undefined && rosDataType != undefined) {
-            let rosEndpoints = output.get(topic);
-            if (rosEndpoints == undefined) {
-              rosEndpoints = [];
-              output.set(topic, rosEndpoints);
-            }
-            const guid = makeGuid(endpoint.guidPrefix, endpoint.entityId);
-            rosEndpoints.push({ ...endpoint, guid, rosTopic: rosTopic.topic, rosDataType });
-          }
-        }
-      }
-    }
     return output;
   }
 
