@@ -36,6 +36,7 @@ type SubscriptionOpts = {
 export interface SubscriptionEvents {
   publisherConnected: (publisher: EndpointAttributes) => void;
   message: (timestamp: Time, msg: unknown, data: Uint8Array, publisher: EndpointAttributes) => void;
+  error: (err: Error) => void;
 }
 
 export class Subscription extends EventEmitter<SubscriptionEvents> {
@@ -82,13 +83,23 @@ export class Subscription extends EventEmitter<SubscriptionEvents> {
     });
 
     this._participant.on("userData", (userData) => {
-      if (userData.subscription.topicName !== this._subscribeOpts.topicName) {
+      const topicName = this._subscribeOpts.topicName;
+      if (userData.subscription.topicName !== topicName) {
         return;
       }
 
       const timestamp = userData.timestamp ?? fromDate(new Date());
-      const msg = this._msgReader?.readMessage(userData.serializedData);
-      this.emit("message", timestamp, msg, userData.serializedData, userData.publication);
+      try {
+        const msg = this._msgReader?.readMessage(userData.serializedData);
+        this.emit("message", timestamp, msg, userData.serializedData, userData.publication);
+      } catch (unk) {
+        const err = unk instanceof Error ? unk : new Error(unk as string);
+        const size = userData.serializedData.byteLength;
+        this.emit(
+          "error",
+          new Error(`Failed to parse ${size} byte message on "${topicName}": ${err.message}`),
+        );
+      }
     });
   }
 
