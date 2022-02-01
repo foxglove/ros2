@@ -45,7 +45,7 @@
     "@foxglove/tsconfig": "1.1.0",
     "@types/jest": "27.4.0",
     "@typescript-eslint/eslint-plugin": "5.9.1",
-    "@typescript-eslint/parser": "5.9.1",
+    "@typescript-eslint/parser": "5.10.2",
     "esbuild": "0.14.11",
     "esbuild-runner": "2.2.1",
     "eslint": "8.6.0",
