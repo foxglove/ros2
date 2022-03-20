@@ -187,9 +187,6 @@ export class RosNode extends EventEmitter<RosNodeEvents> {
     if (typeName == undefined) {
       throw new Error(`Invalid dataType "${options.dataType}"`);
     }
-    if (options.reliability?.kind === Reliability.BestEffort) {
-      throw new Error(`BestEffort reliability is not supported yet`);
-    }
 
     // Check if we are already subscribed
     let subscription = this.subscriptions.get(options.topic);
@@ -202,9 +199,9 @@ export class RosNode extends EventEmitter<RosNodeEvents> {
     const rtpsOpts = {
       topicName,
       typeName,
-      durability: options.durability ?? Durability.TransientLocal,
+      durability: options.durability ?? Durability.Volatile,
       reliability: options.reliability ?? {
-        kind: Reliability.Reliable,
+        kind: Reliability.BestEffort,
         maxBlockingTime: DURATION_INFINITE,
       },
       history: options.history ?? { kind: HistoryKind.KeepLast, depth: 1 },
