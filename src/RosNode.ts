@@ -11,6 +11,7 @@ import {
   Reliability,
   selectIPv4,
   UdpSocketCreate,
+  UdpSocketOptions,
 } from "@foxglove/rtps";
 import { EventEmitter } from "eventemitter3";
 
@@ -64,6 +65,7 @@ export class RosNode extends EventEmitter<RosNodeEvents> {
   constructor(options: {
     name: string;
     udpSocketCreate: UdpSocketCreate;
+    udpSocketOptions?: UdpSocketOptions;
     addresses?: string[];
     getNetworkInterfaces?: () => NetworkInterface[];
     domainId?: number;
@@ -84,6 +86,7 @@ export class RosNode extends EventEmitter<RosNodeEvents> {
       domainId: options.domainId,
       guidPrefix: options.guidPrefix,
       udpSocketCreate: options.udpSocketCreate,
+      udpSocketOptions: options.udpSocketOptions,
       log: options.log,
     });
 
