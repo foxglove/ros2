@@ -8,7 +8,7 @@ import { durationToString, RosEndpoint, RosNode, vendorName } from "../src";
 async function main() {
   const ros = new RosNode({
     name: "listener",
-    udpSocketCreate: UdpSocketNode.Create,
+    udpSocketCreate: async () => await UdpSocketNode.Create(),
     getNetworkInterfaces,
     // log: console, // Enable this for verbose console debugging
   });
