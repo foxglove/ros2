@@ -35,8 +35,8 @@
   },
   "dependencies": {
     "@foxglove/rosmsg": "^2.0.0 || ^3.0.0",
-    "@foxglove/rosmsg2-serialization": "^1.0.5",
-    "@foxglove/rtps": "^1.4.1",
+    "@foxglove/rosmsg2-serialization": "^1.0.6",
+    "@foxglove/rtps": "^1.5.1",
     "eventemitter3": "^4.0.7"
   },
   "devDependencies": {
