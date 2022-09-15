@@ -546,10 +546,10 @@
   resolved "https://registry.yarnpkg.com/@foxglove/rostime/-/rostime-1.1.2.tgz#f8e1f10bff115c22be8a3e06791c2ac800449ee8"
   integrity sha512-vWuTJCuGv0xvgwOlrZ1y2MevmNMVxWcUU/HwlmYXi/jUq/kRaACStU18uyuZ3LzdNKaffkti0rTcXWESaQjwQw==
 
-"@foxglove/rtps@^1.5.1":
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/@foxglove/rtps/-/rtps-1.5.1.tgz#06d91d5cd0a3dd47ef9358983851c04cf2c75765"
-  integrity sha512-J0sOSw+gumSTipb4KZn5X1hQVdohhbau0NioIzCKNW++uDOo8rhR96XvuPZK7TUaScO81R5Q7Hi7UQQjR/BtvQ==
+"@foxglove/rtps@^1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@foxglove/rtps/-/rtps-1.6.0.tgz#cecd9d16668001dc4b8116dbe4fd8f25f4ac5eb9"
+  integrity sha512-iPcG1Q3sjNxBOgnPHteHukxopSymHhscZiury0dJZTz7gRLJ6SbgcG5qHytSrmQyTmOyynHjNinWo00hetIEdg==
   dependencies:
     "@foxglove/cdr" "^2.0.0"
     "@foxglove/rostime" "^1.1.2"
@@ -933,10 +933,10 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest@29.0.1":
-  version "29.0.1"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-29.0.1.tgz#b5610ae1a1c5f6e0f6beb132941722da7c493c28"
-  integrity sha512-CAZrjLRZs4xEdIrfrdV74xK1Vo/BKQZwUcjJv3gp6gMeV3BsVxMnXTcgtYOKyphT4DPPo7jxVEVhuwJTQn3oPQ==
+"@types/jest@29.0.3":
+  version "29.0.3"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-29.0.3.tgz#b61a5ed100850686b8d3c5e28e3a1926b2001b59"
+  integrity sha512-F6ukyCTwbfsEX5F2YmVYmM5TcTHy1q9P5rWlRbrk56KyMh3v9xRGUO3aa8+SkvMi0SHXtASJv1283enXimC0Og==
   dependencies:
     expect "^29.0.0"
     pretty-format "^29.0.0"
@@ -3569,10 +3569,10 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
-ts-jest@29.0.0:
-  version "29.0.0"
-  resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-29.0.0.tgz#3617e10c39a76380fe521d0c26186a773f5f1e46"
-  integrity sha512-OxUaigbv5Aon3OMLY9HBtwkGMs1upWE/URrmmVQFzzOcGlEPVuWzGmXUIkWGt/95Dj/T6MGuTrHHGL6kT6Yn8g==
+ts-jest@29.0.1:
+  version "29.0.1"
+  resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-29.0.1.tgz#3296b39d069dc55825ce1d059a9510b33c718b86"
+  integrity sha512-htQOHshgvhn93QLxrmxpiQPk69+M1g7govO1g6kf6GsjCv4uvRV0znVmDrrvjUrVCnTYeY4FBxTYYYD4airyJA==
   dependencies:
     bs-logger "0.x"
     fast-json-stable-stringify "2.x"
