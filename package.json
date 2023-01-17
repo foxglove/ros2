@@ -46,7 +46,7 @@
     "@types/jest": "29.0.3",
     "@typescript-eslint/eslint-plugin": "5.37.0",
     "@typescript-eslint/parser": "5.37.0",
-    "esbuild": "0.15.7",
+    "esbuild": "0.17.1",
     "esbuild-runner": "2.2.1",
     "eslint": "8.23.1",
     "eslint-config-prettier": "8.5.0",
