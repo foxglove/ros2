@@ -1,4 +1,4 @@
-import { RosMsgDefinition } from "@foxglove/rosmsg";
+import { MessageDefinition } from "@foxglove/message-definition";
 import { MessageReader } from "@foxglove/rosmsg2-serialization";
 import { Time, fromDate } from "@foxglove/rostime";
 import {
@@ -21,7 +21,7 @@ export type SubscribeOpts = {
   durability?: Durability;
   reliability?: ReliabilityAndMaxBlockingTime;
   history?: HistoryAndDepth;
-  msgDefinition?: RosMsgDefinition[];
+  msgDefinition?: MessageDefinition[];
   skipParsing?: boolean;
 };
 
@@ -29,7 +29,7 @@ type SubscriptionOpts = {
   subscribeOpts: RtpsSubscribeOpts;
   readerEntityId: EntityId;
   participant: Participant;
-  msgDefinition?: RosMsgDefinition[];
+  msgDefinition?: MessageDefinition[];
   skipParsing?: boolean;
 };
 
@@ -40,7 +40,7 @@ export interface SubscriptionEvents {
 }
 
 export class Subscription extends EventEmitter<SubscriptionEvents> {
-  readonly msgDefinition?: ReadonlyArray<RosMsgDefinition>;
+  readonly msgDefinition?: ReadonlyArray<MessageDefinition>;
 
   private readonly _subscribeOpts: RtpsSubscribeOpts;
   private readonly _participant: Participant;
