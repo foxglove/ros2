@@ -77,7 +77,7 @@ net.ipv4.udp_mem=26214400
 
 ## License
 
-@foxglove/ros2 is licensed under [MIT License](https://opensource.org/licenses/MIT).
+@foxglove/ros2 is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
 ## Releasing
 
