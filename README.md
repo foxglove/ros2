@@ -4,6 +4,10 @@
 
 [![npm version](https://img.shields.io/npm/v/@foxglove/ros2.svg?style=flat)](https://www.npmjs.com/package/@foxglove/ros2)
 
+## Deprecated
+
+This library is no longer maintained by Foxglove, as we now use the [Foxglove WebSocket](https://foxglove.dev/docs/studio/connection/ros2) for connecting to ROS 2 systems.
+
 ## Usage
 
 A simple listener that is compatible with the ROS 2 "talker" example application.
